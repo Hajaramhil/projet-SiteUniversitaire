@@ -1,0 +1,166 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #0056b3; /* Change to match university colors */
+  }
+  
+  .navbar img {
+    width: 120px; /* Adjust as necessary */
+  }
+  
+  .hero {
+    background-image: url('background-university.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 4em 1em;
+  }
+  
+  .hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .departments a {
+    display: inline-block;
+    margin: 1em;
+    padding: 0.5em 1em;
+    background-color: #007bff; /* Change to match university colors */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .departments a:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-button button {
+    padding: 0.5em 1em;
+    background-color: #4CAF50; /* Change to match university colors */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button button:hover {
+    background-color: #46a049;
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  
+  .hero-content {
+    position: relative;
+    text-align: center;
+  }
+  
+  .hero-logo {
+    width: 100%; /* ou une autre largeur selon votre design */
+    height: auto;
+    /* Si vous souhaitez que l'image soit derrière le texte et les boutons */
+    z-index: -1;
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 50%; /* ajustez en fonction de la position désirée */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* ou une autre couleur qui ressort bien sur votre image */
+    z-index: 1;
+  }
+  
+  .departments {
+    /* Pour être sûr que les boutons restent au-dessus de l'image */
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  .hero-background {
+    width: 100%;
+    height: auto;
+    /* Assurez-vous que l'image de fond couvre tout l'espace disponible */
+  }
+  
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* pour être sûr que le contenu reste au-dessus de l'image de fond */
+  }
+  
+  .departments {
+    margin-top: 20px; /* ou la valeur nécessaire pour positionner sous le texte */
+  }
+  
+  .departments a {
+    background-color: rgba(0, 0, 0, 0.5); /* couleur de fond semi-transparente pour les boutons */
+    color: white;
+    padding: 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    /* Ajoutez d'autres styles de boutons comme l'ombre, etc. */
+  }
+  
+  
+  
+  .announcements-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f8f8f8; /* Couleur de fond de la section des annonces */
+  }
+  
+  .announcement {
+    background-color: rgb(243, 239, 30) ; /* Couleur de fond initiale des annonces */
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 200px; /* Ou la taille souhaitée */
+    height: 200px;
+    margin: 10px;
+    text-align: center;
+    transition: background-color 0.3s; /* Animation de changement de couleur */
+  }
+  
+  .announcement:hover {
+    background-color: rgb(45, 188, 232); /* Couleur au survol */
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* ... */
+  
+  
+  
