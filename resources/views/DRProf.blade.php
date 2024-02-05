@@ -94,22 +94,29 @@
                         display: flex;
                         justify-content: space-between;
                      }
-                
-                    .recentOrders {
+                     .recentOrders {
                         background-color: #fff;
                         padding: 20px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                         width: 60%; /* Ajustez selon vos besoins */
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
                     }
                 
                     .addStudentForm {
-                        background-color: #fff;
+                         margin: 5px;
                         padding: 20px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                         width: 35%; /* Ajustez selon vos besoins */
                         display: flex;
                         align-items: center;
                         flex-direction: column;
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
                     }
                 
                     .cardHeader {
@@ -148,8 +155,12 @@
                         color: #fff;
                     }
                 
-                    tr:nth-child(even) {
-                        background-color: #f9f9f9;
+                    .btn:hover{
+                        background-color: #28a745;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
                     }
                 
                     .addStudentForm p{
@@ -168,20 +179,22 @@
                 </style>
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Liste Des Professeurs</h2>
+                        <h2  style="color:white">Liste Des Professeurs</h2>
                     </div>
                 
                     <table>
                         <thead>
                             <tr>
+                                <td>code</td>
                                 <td>Nom</td>
                                 <td>Email</td>
-                                <td>Filière</td>
+                                <td>Programme</td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($Data['ListeProfs'] as $prof)
                                 <tr>
+                                    <td>{{ $prof->ID }}</td>
                                     <td>{{ $prof->Nom }}</td>
                                     <td>{{ $prof->Email }}</td>
                                     <td>{{ $prof->Programme }}</td>
@@ -193,9 +206,10 @@
                 
                 
                 <div class="addStudentForm">
-                    <h2>Ajouter/supprimer Étudiant</h2>
+                    <h2 style="color: white">Ajouter/supprimer Prof</h2>
                     
-                    <form id="addStudentForm">
+                    <form action="{{route("AjoutProf")}}" method="post">
+                        @csrf
                         <p>code</p>
                         <input type="number"  name="code" required>
                         <p>Nom complet</p>
@@ -206,8 +220,8 @@
                         <input type="email"  name="email" required>
                         <p>Programme (deust,licence ,Master) </p>
                         <input type="text" id="filiere" name="Programme" required>
-                        <p>Ajout ou supression</p>
-                        <input type="checkbox">
+                        <p>supression</p>
+                        <input type="checkbox" name="suppression">
                         <button type="submit" class="btn">Valider</button>
                     </form>
                 </div>

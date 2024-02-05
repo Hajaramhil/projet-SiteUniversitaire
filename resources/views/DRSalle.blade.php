@@ -21,7 +21,7 @@
                             <img   src="{{asset("images/logo-universite.png")}}" alt="University Logo"  class="university-logo"/>
                            
                         </span>
-                        <span class="title">Responsable Péda</span>
+                        <span class="title">Responsable </span>
                     </a>
                 </li>
 
@@ -101,10 +101,12 @@
                 /* Button Styles */
                 button {
                     padding: 10px;
-                    background-color: #007BFF;
+                    background-color: #2A2185;
                     color: #fff;
                     cursor: pointer;
                     border: none;
+                    height: 40px;
+                    width: 150px;
                     border-radius: 5px;
                 }
         
@@ -164,7 +166,9 @@
                     padding: 15px;
                     margin-bottom: 15px;
                     background-color: #fff;
-                    border-radius: 5px;
+                    border-radius: 10px;
+                    background-color: #2A2185;
+                    color: white
                 }
         
                 /* Edit/Delete Buttons Styles */
@@ -178,10 +182,10 @@
                     padding: 8px;
                     margin-right: 10px;
                     cursor: pointer;
-                    background-color: #333;
-                    color: #fff;
+                    background-color: white;
+                    color: black;
                     border: none;
-                    border-radius: 4px;
+                    border-radius: 10px;
                 }
             </style>
             <div class="container" style="padding: 20px">
@@ -199,14 +203,15 @@
                     <div class="modal-content">
                         <span class="close" onclick="closeCreateModal()">&times;</span>
                         <h3>Create New Classroom</h3>
-                        <form id="classroom-form">
+                        <form action="{{route("AjoutClasse")}}" method="POST">
+                            @csrf
                             <label for="classroom-name">Classroom Name:</label>
-                            <input type="text" id="classroom-name" required>
+                            <input type="text"  name="nom" required>
         
                             <label for="classroom-capacity">Capacity:</label>
-                            <input type="number" id="classroom-capacity" required>
+                            <input type="number"   name="capacite" required>
         
-                            <button type="button" onclick="addClassroom()">Create Classroom</button>
+                            <button type="submit" >Create Classroom</button>
                         </form>
                     </div>
                 </div>
@@ -215,15 +220,16 @@
                 <div id="edit-modal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeEditModal()">&times;</span>
-                        <h3>Edit Classroom</h3>
-                        <form id="edit-form">
-                            <label for="edit-classroom-name">Classroom Name:</label>
-                            <input type="text" id="edit-classroom-name" required>
+                        <h3>Supression de classe</h3>
+                        <form action="{{route("SupressionClasse")}}" method="POST">
+                            @csrf
+                            <label for="edit-classroom-name">ID de la classe:</label>
+                            <input type="number" id="edit-classroom-name" name ="ID" required>
         
                             <label for="edit-classroom-capacity">Capacity:</label>
                             <input type="number" id="edit-classroom-capacity" required>
         
-                            <button type="button" onclick="saveEditedClassroom()">Save Changes</button>
+                            <button type="submit" >suprimer</button>
                         </form>
                     </div>
                 </div>
@@ -232,11 +238,7 @@
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         // Mock data for initial classrooms
-                        let classrooms = [
-                            { id: 1, name: "Classroom A", capacity: 30 },
-                            { id: 2, name: "Classroom B", capacity: 25 }
-                        ];
-        
+                        let classrooms = <?php echo  json_encode($Data["classe"]);?>;
                         // Display initial classrooms
                         displayClassrooms();
         
@@ -253,11 +255,11 @@
                                 classroomElement.className = "classroom";
                                 classroomElement.innerHTML = `
                                     <h3>${classroom.name}</h3>
-                                    <p>Capacity: ${classroom.capacity}</p>
+                                    <p>Capacite: ${classroom.capacity}</p>
+                                    <p>numero de la classe: ${classroom.id}</p>
                                     <div class="edit-delete-buttons">
-                                        <button onclick="openEditModal(${classroom.id})">Edit</button>
-                                        <button onclick="deleteClassroom(${classroom.id})">Delete</button>
-                                    </div>
+                                        <button  onclick="openEditModal(${classroom.id})">Delete</button>
+                                     </div>
                                 `;
                                 classroomsList.appendChild(classroomElement);
                             });
@@ -278,7 +280,7 @@
                             const classroomToEdit = classrooms.find(classroom => classroom.id === id);
         
                             if (classroomToEdit) {
-                                document.getElementById("edit-classroom-name").value = classroomToEdit.name;
+                                document.getElementById("edit-classroom-name").value = id;
                                 document.getElementById("edit-classroom-capacity").value = classroomToEdit.capacity;
                                 document.getElementById("edit-modal").style.display = "block";
                                 document.getElementById("edit-modal").dataset.id = id;
@@ -329,7 +331,7 @@
                             const classroomToEdit = classrooms.find(classroom => classroom.id == id);
         
                             if (classroomToEdit) {
-                                classroomToEdit.name = document.getElementById("edit-classroom-name").value;
+                                classroomToEdit.name = id;
                                 classroomToEdit.capacity = parseInt(document.getElementById("edit-classroom-capacity").value);
         
                                 // Display updated classrooms

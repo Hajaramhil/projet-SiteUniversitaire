@@ -116,22 +116,25 @@
   </div>
   <div class="announcements-section">
       <div class="announcement">
-          <div class="content-annoucement">
-              <h2>Annonce 1</h2>
-                  <a href="annonce1.html" class="read-more">Plus</a>
-          </div>
+        <div class="content-annoucement">
+          <h2>Annonce 1 : </h2><br>
+          <h5>DÉMARRAGE DES ENSEIGNEMENTS DU SEMESTRE DU PRINTEMPS 2023-2024</h5>
+              <a href="https://fstt.ac.ma/Portail2023/demarrage-des-enseignements-du-semestre-du-printemps-2023-2024/" class="read-more">Plus</a>
+      </div>
+    </div>
+      <div class="announcement">
+        <div class="content-annoucement">
+          <h2>Annonce 2 : </h2><br>
+          <h5>COMPÉTITION « HULT PRIZE »</h5>
+                <a href="https://fstt.ac.ma/Portail2023/competition-hult-prize/" class="read-more">Plus</a>
+        </div>
       </div>
       <div class="announcement">
-          <div class="content-annoucement">
-              <h2>Annonce 2</h2>
-                  <a href="annonce2.html" class="read-more">Plus</a>
-          </div>
-      </div>
-      <div class="announcement">
-          <div class="content-annoucement">
-              <h2>Annonce 2</h2>
-                  <a href="annonce2.html" class="read-more">Plus</a>
-          </div>
+        <div class="content-annoucement">
+          <h2>Annonce 3 : </h2><br>
+          <h5>CALENDRIER DES EXAMENS DE RATTRAPAGE – SEMESTRE D’AUTOMNE 2023-2024</h5>
+                <a href="https://fstt.ac.ma/Portail2023/planning-des-controles-de-rattrapages-semestre-dautomne-2023-2024/" class="read-more">Plus</a>
+        </div>
       </div>
   </div>
 </div>

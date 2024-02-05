@@ -100,16 +100,24 @@
                         padding: 20px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                         width: 60%; /* Ajustez selon vos besoins */
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
                     }
                 
                     .addStudentForm {
-                        background-color: #fff;
+                         margin: 5px;
                         padding: 20px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                         width: 35%; /* Ajustez selon vos besoins */
                         display: flex;
                         align-items: center;
                         flex-direction: column;
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
                     }
                 
                     .cardHeader {
@@ -117,6 +125,7 @@
                         justify-content: space-between;
                         align-items: center;
                         margin-bottom: 20px;
+                        
                     }
                 
                     h2 {
@@ -124,6 +133,12 @@
                     }
                 
                     .btn {
+                        background-color: #28a745;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
+                    }.btn:hover{
                         background-color: #28a745;
                         color: #fff;
                         border: none;
@@ -148,9 +163,7 @@
                         color: #fff;
                     }
                 
-                    tr:nth-child(even) {
-                        background-color: #f9f9f9;
-                    }
+                   
                 
                     .addStudentForm p{
                         margin: 3px;
@@ -171,12 +184,13 @@
 
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Liste Des Étudiants</h2>
+                        <h2 style="color: white">Liste Des Étudiants</h2>
                     </div>
                 
                     <table>
                         <thead>
                             <tr>
+                                <td>Code</td>
                                 <td>Nom</td>
                                 <td>Email</td>
                                 <td>Programme</td>
@@ -185,6 +199,7 @@
                         <tbody>
                             @foreach ($Data['ListeEtudiants'] as $etudiant)
                                 <tr>
+                                    <td>{{ $etudiant->ID }}</td>
                                     <td>{{ $etudiant->Nom }}</td>
                                     <td>{{ $etudiant->Email }}</td>
                                     <td>{{ $etudiant->Programme }}</td>
@@ -200,9 +215,10 @@
 
 
                 <div class="addStudentForm">
-                    <h2>Ajouter/supprimer Étudiant</h2>
+                    <h2 style="color: white">Ajouter/supprimer Étudiant</h2>
                     
-                    <form id="addStudentForm">
+                    <form action="{{route("AjoutEtudiant")}}" method="post">
+                        @csrf
                         <p>code</p>
                         <input type="number"  name="code" required>
                         <p>Nom complet</p>
@@ -213,8 +229,10 @@
                         <input type="email"  name="email" required>
                         <p>Programme (deust,licence ,Master) </p>
                         <input type="text" id="filiere" name="Programme" required>
-                        <p>Ajout ou supression</p>
-                        <input type="checkbox">
+                        <p>Genre Garcons/fille</p>
+                        <input type="checkbox" name="Genre">
+                        <p>supression</p>
+                        <input type="checkbox" name="suppression">
                         <button type="submit" class="btn">Valider</button>
                     </form>
                 </div>

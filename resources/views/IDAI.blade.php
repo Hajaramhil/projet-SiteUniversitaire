@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="content">
-    <img class="logo"  src="{{ asset('images/IMAGE.jpg') }}" alt="">
+    <img class="logo"  src="{{ asset('images/logo.png') }}" alt="">
 <div class="LABEL">
     <h2> Ingénierie de développement d'applications informatiques </h2>
 </div>

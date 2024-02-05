@@ -141,14 +141,14 @@
       text-decoration: rgb(62, 115, 148) wavy underline;
     }
     .announcements-section {
-        margin-left: 22%;
+        margin-left: 90px;
         display: flex;
         justify-content: space-between;
 }
 
 .announcement {
   position: relative;
-  width: 200px;
+  width: 300px;
   height: 200px;
   margin: 10px;
   border: 1px solid #ddd;
@@ -159,11 +159,12 @@
   z-index: 0;
 
 
+
 }
 .content-annoucement{
     color: #eef1f2;
     text-align: center;
-    font-size: 30px;
+    font-size: 15px;
     z-index: 1;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -197,7 +198,7 @@
 }
 .read-more {
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 22px;
     color: #0056b3;
     text-decoration: none;
     font-weight: bold;
@@ -288,7 +289,7 @@
     padding: 20px;
     color: #333;
     text-align: center;
-    font-family: 'Freestyle Script', sans-serif;
+    font-family: Baguet Script, sans-serif;
     font-size: 210%;
 
 }
@@ -473,7 +474,7 @@ h4{
                                                                 <div class="elementor-social-icons-wrapper elementor-grid">
                                                                     <a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-094775b" href="https://www.facebook.com/fstt.ac.ma?mibextid=LQQJ4d" target="_blank"><span class="elementor-screen-only">Facebook</span>ⓕ</a>
                                                                     <a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-bc1e7c0" href="https://instagram.com/fsttanger?igshid=Mzc1MmZhNjY=" target="_blank"><span class="elementor-screen-only">Instagram</span>insta</a>
-                                                                    <a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-dd3c08f" href="https://www.linkedin.com/school/fsttanger/" target="_blank"><span class="elementor-screen-only">Linkedin</span>🇮🇳</a>
+                                                                    <a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-dd3c08f" href="https://www.linkedin.com/school/fsttanger/" target="_blank"><span class="elementor-screen-only">Linkedin</span>IN</a>
                                                                 </div>
                                                             </div>
                                                         </div>

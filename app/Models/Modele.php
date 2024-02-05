@@ -70,6 +70,9 @@ class Modele extends Model {
         $listeProfs = DB::select("SELECT * FROM Prof");
         $statistiques = DB::select("SELECT * FROM statistique");
         $note = DB::select("SELECT * FROM note");
+        $classe = DB::select("SELECT * FROM classe");
+        $annonce = DB::select("SELECT * FROM annonce ORDER BY id DESC ");
+        $demande = DB::select("SELECT * FROM demande  ORDER BY id DESC ");  
 
         // Retourner la liste de tous les étudiants, des professeurs et des statistiques
         return [
@@ -78,7 +81,10 @@ class Modele extends Model {
             'ListeEtudiants' => $listeEtudiants,
             'ListeProfs' => $listeProfs,
             'Statistiques' => $statistiques,
-            "Notes" => $note
+            "Notes" => $note,
+            "classe" => $classe,
+            "annonce" => $annonce,
+            "demande" => $demande 
         ];
     }
     public function DashBordLogin($email,$password){
@@ -115,4 +121,76 @@ class Modele extends Model {
         ];
 
 }
+
+public function AjoutEtudiant($code, $nom, $password, $email, $programme, $suppression,$genre){
+    
+        // Ajout de l'étudiant
+        DB::table('Etudiant')->insert([
+            'ID' => $code,
+            'Nom' => $nom,
+            'Programme' => $programme,
+            'Email' => $email,
+            'Password' => $password,
+            'Genre' => $genre  
+        ]);
+    
+}
+public function supressionEtudiant($code){
+    
+    DB::table('note')->where('Etudiant_ID', $code)->delete();
+
+    DB::table('Etudiant')->where('ID', $code)->delete();
+
+}
+public function AjoutProf($code, $nom, $password, $email, $programme, $suppression){
+    DB::table('Prof')->insert([
+        'ID' => $code,
+        'Nom' => $nom,
+        'Programme' => $programme,
+        'Email' => $email,
+        'Password' => $password,
+         
+    ]);
+
+}
+public function supressionProf($code){
+    DB::table('Prof')->where('ID', $code)->delete();
+}
+public function SupressionClasse($code){
+    DB::table('Classe')->where('ID', $code)->delete();
+}
+public function AjoutClasse($nom,$capacite){
+    // Insérer les données dans la base de données
+ return  DB::table('classe')->insert([
+    'name' => $nom,
+    'capacity' => $capacite
+]);
+
+}
+public function SupressionAnnonce($code){
+    DB::table('Annonce')->where('ID', $code)->delete();
+}
+public function AjoutAnnonce($titre,$contenu){
+    // Insérer les données dans la base de données
+ return  DB::table('Annonce')->insert([
+    'titre' => $titre,
+    'contenu' => $contenu
+]);
+
+}
+public function SupressionDemande($code){
+    DB::table('demande')->where('ID', $code)->delete();
+}
+public function AjoutDemande($titre,$contenu){
+    // Insérer les données dans la base de données
+ return  DB::table('demande')->insert([
+    'nom' => $titre,
+    'contenu' => $contenu
+]);
+
+}
+
+
+
+
 }

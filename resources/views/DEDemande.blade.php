@@ -61,7 +61,7 @@
                 </li>
               
                 <li>
-                    <a href="#">
+                    <a href="{{route("k")}}">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -74,38 +74,272 @@
         <!-- ========================= Main ==================== -->
         <div class="main">
             <style>
-              
+                /* Add specific styles for salles.html here */
+                /* Example styles: */
+                
         
-                .demande {
-                    border: 1px solid #ccc;
-                    border-radius: 10px;
+                
+        
+                h2 {
+                    color: #333;
+                }
+        
+                /* Button Styles */
+                button {
+                    padding: 10px;
+                    background-color: #2A2185;
+                    color: #fff;
+                    cursor: pointer;
+                    border: none;
+                    height: 40px;
+                    width: 150px;
+                    border-radius: 5px;
+                }
+        
+                /* Modal Styles */
+                .modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                }
+        
+                .modal-content {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 5px;
+                }
+        
+                .close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+        
+                /* Form Styles */
+                form {
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                label {
+                    margin-bottom: 8px;
+                }
+        
+                input {
                     margin-bottom: 15px;
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+        
+                /* Classrooms List Styles */
+                .classrooms-list {
+                    margin-top: 20px;
+                }
+        
+                .classroom {
+                    border: 1px solid #ccc;
                     padding: 15px;
-                    margin: 10px;
+                    margin-bottom: 15px;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    background-color: #2A2185;
+                    color: white
+                }
+        
+                /* Edit/Delete Buttons Styles */
+                .edit-delete-buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 10px;
+                }
+        
+                .edit-delete-buttons button {
+                    padding: 8px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                    background-color: white;
+                    color: black;
+                    border: none;
+                    border-radius: 10px;
                 }
             </style>
+            <div class="container" style="padding: 20px">
+                <!-- Content specific to salles.html -->
+                <h2>Liste des Demandes Etudiant</h2>
         
+                <button onclick="openCreateModal()">Nouvelle demande</button>
         
-        <div class="container">
-                <h2>Liste des Demandes d'Étudiants</h2>
-        
-                <!-- Exemple de demande d'étudiant -->
-                <div class="demande">
-                    <h3>Demande</h3>
-                    
-                    <p>Description de la demande Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div id="classrooms-list" class="classrooms-list">
+                    <!-- Classrooms will be dynamically added here -->
                 </div>
         
-                <!-- Répétez cette structure pour chaque demande d'étudiant -->
-                <div class="demande">
-                    <h3>Demande</h3>
-                   
-                    <p>Description de la demande Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <!-- Create Classroom Modal -->
+                <div id="create-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeCreateModal()">&times;</span>
+                        <h3>Nouvelle Demandes</h3>
+                        <form action="{{route("AjoutDemandeE")}}" method="POST">
+                            @csrf
+                            <label for="classroom-name">Nom complet :</label>
+                            <input type="text"  name="nom" required>
+        
+                            <label for="classroom-capacity">contenu:</label>
+                            <input type="text"   name="capacite" required>
+        
+                            <button type="submit" >cree</button>
+                        </form>
+                    </div>
                 </div>
         
-                <!-- Ajoutez d'autres demandes ici -->
+                <!-- Edit Classroom Modal -->
+                <div id="edit-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeEditModal()">&times;</span>
+                        <h3>Supression de Demande</h3>
+                        <form action="{{route("SupressionDemande")}}" method="POST">
+                            @csrf
+                            <label for="edit-classroom-name">ID de la demande:</label>
+                            <input type="number" id="edit-classroom-name" name ="ID" required>
         
-            </div>
+                             
+                            <input type="hidden" id="edit-classroom-capacity" required>
+        
+                            <button type="submit" >suprimer</button>
+                        </form>
+                    </div>
+                </div>
+        
+                <!-- <script src="assets/js/salles.js"></script> Add a specific JS file for salles -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Mock data for initial classrooms
+                        let classrooms = <?php echo  json_encode($Data["demande"]);?>;
+                        // Display initial classrooms
+                        displayClassrooms();
+        
+                        // Function to display classrooms
+                        function displayClassrooms() {
+                            const classroomsList = document.getElementById("classrooms-list");
+        
+                            // Clear the existing content
+                            classroomsList.innerHTML = "";
+        
+                            // Display each classroom
+                            classrooms.forEach(classroom => {
+                                const classroomElement = document.createElement("div");
+                                classroomElement.className = "classroom";
+                                classroomElement.innerHTML = `
+                                    <h3>${classroom.nom}</h3>
+                                    <p>${classroom.contenu}</p>
+                                    <p></p>
+                                    <div class="edit-delete-buttons">
+                                      </div>
+                                `;
+                                classroomsList.appendChild(classroomElement);
+                            });
+                        }
+        
+                        // Function to open the create modal
+                        window.openCreateModal = function () {
+                            document.getElementById("create-modal").style.display = "block";
+                        };
+        
+                        // Function to close the create modal
+                        window.closeCreateModal = function () {
+                            document.getElementById("create-modal").style.display = "none";
+                        };
+        
+                        // Function to open the edit modal
+                        window.openEditModal = function (id) {
+                            const classroomToEdit = classrooms.find(classroom => classroom.id === id);
+        
+                            if (classroomToEdit) {
+                                document.getElementById("edit-classroom-name").value = id;
+                                document.getElementById("edit-classroom-capacity").value = classroomToEdit.capacity;
+                                document.getElementById("edit-modal").style.display = "block";
+                                document.getElementById("edit-modal").dataset.id = id;
+                            }
+                        };
+        
+                        // Function to close the edit modal
+                        window.closeEditModal = function () {
+                            document.getElementById("edit-modal").style.display = "none";
+                        };
+        
+                        // Function to add a new classroom
+                        window.addClassroom = function () {
+                            const name = document.getElementById("classroom-name").value;
+                            const capacity = document.getElementById("classroom-capacity").value;
+        
+                            // Validate the capacity (assuming a positive integer is required)
+                            if (!/^[1-9]\d*$/.test(capacity)) {
+                                alert("Please enter a valid positive integer for capacity.");
+                                return;
+                            }
+        
+                            // Create a new classroom object
+                            const newClassroom = { id: generateId(), name, capacity: parseInt(capacity) };
+        
+                            // Add the new classroom to the list
+                            classrooms.push(newClassroom);
+        
+                            // Display all classrooms including the new one
+                            displayClassrooms();
+        
+                            // Clear the form fields
+                            document.getElementById("classroom-name").value = "";
+                            document.getElementById("classroom-capacity").value = "";
+        
+                            // Close the create modal
+                            closeCreateModal();
+                        };
+        
+                        // Function to generate a unique ID for classrooms
+                        function generateId() {
+                            return Math.floor(Math.random() * 1000) + 1;
+                        }
+        
+                        // Function to save edited classroom
+                        window.saveEditedClassroom = function () {
+                            const id = document.getElementById("edit-modal").dataset.id;
+                            const classroomToEdit = classrooms.find(classroom => classroom.id == id);
+        
+                            if (classroomToEdit) {
+                                classroomToEdit.name = id;
+                                classroomToEdit.capacity = parseInt(document.getElementById("edit-classroom-capacity").value);
+        
+                                // Display updated classrooms
+                                displayClassrooms();
+        
+                                // Close the edit modal
+                                closeEditModal();
+                            }
+                        };
+        
+                        // Function to delete a classroom
+                        window.deleteClassroom = function (id) {
+                            const confirmDelete = confirm("Are you sure you want to delete this classroom?");
+        
+                            if (confirmDelete) {
+                                classrooms = classrooms.filter(classroom => classroom.id !== id);
+        
+                                // Display updated classrooms
+                                displayClassrooms();
+                            }
+                        };
+                    });
+                </script>
         
     </div>
 

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Modele;
-
+use Illuminate\Support\Facades\Hash;
 class Controller extends BaseController
 {
  
@@ -151,5 +151,121 @@ public function DPAnonce(){
   $Modele = $Modele->D();
   return view("DPAnonce",[ "Data" =>$Modele]);
 }
+public function AjoutEtudiant(Request $request){
+  $code = $request->input('code');
+  $nom = $request->input('nom');
+  $password = $request->input('password');
+  $email = $request->input('email');
+  $programme = $request->input('Programme');
+  $genre = $request->input('Genre') ? true : false;
+  $suppression = $request->input('suppression') ? true : false; // Convertir en booléen
+
+  // Appel de la méthode AjoutEtudiant du modèle avec les données reçues
+  $modele = new Modele();
+   if(!$suppression){
+    $modele->AjoutEtudiant($code, $nom, $password, $email, $programme, $suppression,$genre);
+
+   }else{
+    $modele->supressionEtudiant($code);
+
+   }
+  
+
+     $Modele =  $modele->D();
+        return view("DREtudiant", [ "Data" => $Modele  ]);
+}
+public function AjoutProf(Request $request){
+  $code = $request->input('code');
+  $nom = $request->input('nom');
+  $password = Hash::make($request->input('password'));
+  $email = $request->input('email');
+  $programme = $request->input('Programme');
+  $suppression = $request->input('suppression') ? true : false; // Convertir en booléen
+
+  // Appel de la méthode AjoutEtudiant du modèle avec les données reçues
+  $modele = new Modele();
+   if(!$suppression){
+    $modele->AjoutProf($code, $nom, $password, $email, $programme, $suppression);
+
+   }else{
+    $modele->supressionProf($code);
+
+   }
+   $Modele = $modele->D();
+   return view("DRProf", [ "Data" => $Modele  ]);
+}
+public function SupressionClasse(Request $request){
+  $id = $request->input('ID');
+  $Modele= new Modele();
+  $Modele->SupressionClasse($id);
+  $Modele = $Modele->D();
+  return view("DRSalle", [ "Data" => $Modele  ]);
+}
+public function AjoutClasse(Request $request){
+  // Récupérer les données du formulaire
+  $nom = $request->input('nom');
+  $capacite = $request->input('capacite');
+
+  $Modele= new Modele();
+   $Modele->AjoutClasse($nom,$capacite);
+  $Modele = $Modele->D();
+  return view("DRSalle", [ "Data" => $Modele,  ]);
+
+   
+}
+
+public function SupressionAnnonce(Request $request){
+  $id = $request->input('ID');
+  $Modele= new Modele();
+  $Modele->SupressionAnnonce($id);
+  $Modele = $Modele->D();
+  return view("DRAnonce", [ "Data" => $Modele  ]);
+}
+public function AjoutAnnonce(Request $request){
+  // Récupérer les données du formulaire
+  $nom = $request->input('nom');
+  $capacite = $request->input('capacite');
+
+  $Modele= new Modele();
+   $Modele->AjoutAnnonce($nom,$capacite);
+  $Modele = $Modele->D();
+  return view("DRAnonce", [ "Data" => $Modele,  ]);
+
+   
+}
+
+public function SupressionDemande(Request $request){
+  $id = $request->input('ID');
+  $Modele= new Modele();
+  $Modele->SupressionDemande($id);
+  $Modele = $Modele->D();
+  return view("DPDemande", [ "Data" => $Modele  ]);
+}
+public function AjoutDemande(Request $request){
+  // Récupérer les données du formulaire
+  $nom = $request->input('nom');
+  $capacite = $request->input('capacite');
+
+  $Modele= new Modele();
+   $Modele->AjoutDemande($nom,$capacite);
+  $Modele = $Modele->D();
+  return view("DPDemande", [ "Data" => $Modele,  ]);
+
+   
+}
+public function AjoutDemandeE(Request $request){
+  // Récupérer les données du formulaire
+  $nom = $request->input('nom');
+  $capacite = $request->input('capacite');
+
+  $Modele= new Modele();
+   $Modele->AjoutDemande($nom,$capacite);
+  $Modele = $Modele->D();
+  return view("DEDemande", [ "Data" => $Modele,  ]);
+
+   
+}
+
+
     
 }

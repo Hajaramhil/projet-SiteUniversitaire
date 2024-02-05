@@ -61,7 +61,7 @@
                 </li>
               
                 <li>
-                    <a href="#">
+                    <a href="{{route("k")}}">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <!-- ======================= Cards ================== -->
+       
             
             <div class="cardBox">
                 @foreach ($Data['Statistiques'] as $statistique)
@@ -112,7 +112,7 @@
                 @endforeach
             </div>
             
-            <!-- ================ Order Details List ================= -->
+
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
@@ -159,7 +159,7 @@
                     </table>
                 </div>
 
-                <!-- ================= New Customers ================ -->
+
                 <div class="recentCustomers">
                     <div class="cardHeader">
                         <h2>Liste Des Étudiants</h2>

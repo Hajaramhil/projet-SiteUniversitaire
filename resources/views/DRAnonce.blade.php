@@ -21,7 +21,7 @@
                             <img   src="{{asset("images/logo-universite.png")}}" alt="University Logo"  class="university-logo"/>
                            
                         </span>
-                        <span class="title">Responsable Péda</span>
+                        <span class="title">Responsable </span>
                     </a>
                 </li>
 
@@ -88,51 +88,29 @@
         <!-- ========================= Main ==================== -->
         <div class="main">
             <style>
-                /* Add specific styles for annonces.html here */
+                /* Add specific styles for salles.html here */
                 /* Example styles: */
-               
                 
-                .announcement {
-                    border: 1px solid #ccc;
-                    padding: 15px;
-                    margin-bottom: 15px;
-                    background-color: #fff;
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
+        
+                
+        
+                h2 {
+                    color: #333;
                 }
-                
-                .add-announcement-form {
-                    margin-top: 20px;
-                }
-                
-                #announcement-form,
-                #edit-form {
-                    display: flex;
-                    flex-direction: column;
-                }
-                
-                #announcement-form label,
-                #edit-form label {
-                    margin-bottom: 8px;
-                }
-                
-                #announcement-form input,
-                #announcement-form textarea,
-                #edit-form input,
-                #edit-form textarea {
-                    margin-bottom: 15px;
-                    padding: 8px;
-                }
-                
-                #announcement-form button,
-                #edit-form button {
+        
+                /* Button Styles */
+                button {
                     padding: 10px;
-                    background-color: #007BFF;
+                    background-color: #2A2185;
                     color: #fff;
                     cursor: pointer;
+                    border: none;
+                    height: 40px;
+                    width: 150px;
+                    border-radius: 5px;
                 }
-                
-                /* Modal styles */
+        
+                /* Modal Styles */
                 .modal {
                     display: none;
                     position: fixed;
@@ -142,7 +120,7 @@
                     height: 100%;
                     background-color: rgba(0, 0, 0, 0.5);
                 }
-                
+        
                 .modal-content {
                     position: absolute;
                     top: 50%;
@@ -152,7 +130,7 @@
                     padding: 20px;
                     border-radius: 5px;
                 }
-                
+        
                 .close {
                     position: absolute;
                     top: 10px;
@@ -160,94 +138,130 @@
                     font-size: 20px;
                     cursor: pointer;
                 }
-                button
-                    {
-                        background-color: #28a745;
-                        color: #fff;
-                        border: none;
-                        padding: 10px 15px;
-                        border-radius: 15px;
-                        cursor: pointer;
-                        margin: 7px;
-                    }
-                
+        
+                /* Form Styles */
+                form {
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                label {
+                    margin-bottom: 8px;
+                }
+        
+                input {
+                    margin-bottom: 15px;
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+        
+                /* Classrooms List Styles */
+                .classrooms-list {
+                    margin-top: 20px;
+                }
+        
+                .classroom {
+                    border: 1px solid #ccc;
+                    padding: 15px;
+                    margin-bottom: 15px;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    background-color: #2A2185;
+                    color: white
+                }
+        
+                /* Edit/Delete Buttons Styles */
+                .edit-delete-buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 10px;
+                }
+        
+                .edit-delete-buttons button {
+                    padding: 8px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                    background-color: white;
+                    color: black;
+                    border: none;
+                    border-radius: 10px;
+                }
             </style>
-            <div class="container" style="padding: 20px; font-family: Arial, sans-serif;">
-                <!-- Content specific to annonces.html -->
-                <h2>Latest Announcements</h2>
+            <div class="container" style="padding: 20px">
+                <!-- Content specific to salles.html -->
+                <h2>Liste des Annonces</h2>
         
-                <button onclick="openCreateModal()">Add Announcement</button>
+                <button onclick="openCreateModal()">Nouvelle Annonces</button>
         
-                <div id="announcements-list" class="announcements-list">
-                    <!-- Announcements will be dynamically added here -->
+                <div id="classrooms-list" class="classrooms-list">
+                    <!-- Classrooms will be dynamically added here -->
                 </div>
         
-                <!-- Create Announcement Modal -->
+                <!-- Create Classroom Modal -->
                 <div id="create-modal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeCreateModal()">&times;</span>
-                        <h3>Create New Announcement</h3>
-                        <form id="announcement-form">
-                            <label for="announcement-title">Title:</label>
-                            <input type="text" id="announcement-title" required>
+                        <h3>Create New Annonces</h3>
+                        <form action="{{route("AjoutAnnonce")}}" method="POST">
+                            @csrf
+                            <label for="classroom-name">Titre de l'annonce:</label>
+                            <input type="text"  name="nom" required>
         
-                            <label for="announcement-content">Content:</label>
-                            <textarea id="announcement-content" required></textarea>
+                            <label for="classroom-capacity">contenu:</label>
+                            <input type="text"   name="capacite" required>
         
-                            <button type="button" onclick="addAnnouncement()">Create Announcement</button>
+                            <button type="submit" >cree</button>
                         </form>
                     </div>
                 </div>
         
-                <!-- Edit Announcement Modal -->
+                <!-- Edit Classroom Modal -->
                 <div id="edit-modal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeEditModal()">&times;</span>
-                        <h3>Edit Announcement</h3>
-                        <form id="edit-form">
-                            <label for="edit-announcement-title">Title:</label>
-                            <input type="text" id="edit-announcement-title" required>
+                        <h3>Supression de classe</h3>
+                        <form action="{{route("SupressionAnnonce")}}" method="POST">
+                            @csrf
+                            <label for="edit-classroom-name">ID de la annonce:</label>
+                            <input type="number" id="edit-classroom-name" name ="ID" required>
         
-                            <label for="edit-announcement-content">Content:</label>
-                            <textarea id="edit-announcement-content" required></textarea>
+                             
+                            <input type="hidden" id="edit-classroom-capacity" required>
         
-                            <button type="button" onclick="saveEditedAnnouncement()">Save Changes</button>
+                            <button type="submit" >suprimer</button>
                         </form>
                     </div>
                 </div>
         
-                <!-- <script src="assets/js/annonces.js"></script> Add a specific JS file for announcements -->
+                <!-- <script src="assets/js/salles.js"></script> Add a specific JS file for salles -->
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
-                        // Mock data for initial announcements
-                        let announcements = [
-                            { id: 1, title: "Announcement 1", content: "Content for Announcement 1" },
-                            { id: 2, title: "Announcement 2", content: "Content for Announcement 2" }
-                        ];
+                        // Mock data for initial classrooms
+                        let classrooms = <?php echo  json_encode($Data["annonce"]);?>;
+                        // Display initial classrooms
+                        displayClassrooms();
         
-                        // Display initial announcements
-                        displayAnnouncements();
-        
-                        // Function to display announcements
-                        function displayAnnouncements() {
-                            const announcementsList = document.getElementById("announcements-list");
+                        // Function to display classrooms
+                        function displayClassrooms() {
+                            const classroomsList = document.getElementById("classrooms-list");
         
                             // Clear the existing content
-                            announcementsList.innerHTML = "";
+                            classroomsList.innerHTML = "";
         
-                            // Display each announcement
-                            announcements.forEach(announcement => {
-                                const announcementElement = document.createElement("div");
-                                announcementElement.className = "announcement";
-                                announcementElement.innerHTML = `
-                                    <h3>${announcement.title}</h3>
-                                    <p>${announcement.content}</p>
+                            // Display each classroom
+                            classrooms.forEach(classroom => {
+                                const classroomElement = document.createElement("div");
+                                classroomElement.className = "classroom";
+                                classroomElement.innerHTML = `
+                                    <h3>${classroom.titre}</h3>
+                                    <p>${classroom.contenu}</p>
+                                    <p></p>
                                     <div class="edit-delete-buttons">
-                                        <button onclick="openEditModal(${announcement.id})">Edit</button>
-                                        <button onclick="deleteAnnouncement(${announcement.id})">Delete</button>
-                                    </div>
+                                        <button  onclick="openEditModal(${classroom.id})">Delete</button>
+                                     </div>
                                 `;
-                                announcementsList.appendChild(announcementElement);
+                                classroomsList.appendChild(classroomElement);
                             });
                         }
         
@@ -263,11 +277,11 @@
         
                         // Function to open the edit modal
                         window.openEditModal = function (id) {
-                            const announcementToEdit = announcements.find(announcement => announcement.id === id);
+                            const classroomToEdit = classrooms.find(classroom => classroom.id === id);
         
-                            if (announcementToEdit) {
-                                document.getElementById("edit-announcement-title").value = announcementToEdit.title;
-                                document.getElementById("edit-announcement-content").value = announcementToEdit.content;
+                            if (classroomToEdit) {
+                                document.getElementById("edit-classroom-name").value = id;
+                                document.getElementById("edit-classroom-capacity").value = classroomToEdit.capacity;
                                 document.getElementById("edit-modal").style.display = "block";
                                 document.getElementById("edit-modal").dataset.id = id;
                             }
@@ -278,63 +292,70 @@
                             document.getElementById("edit-modal").style.display = "none";
                         };
         
-                        // Function to add a new announcement
-                        window.addAnnouncement = function () {
-                            const title = document.getElementById("announcement-title").value;
-                            const content = document.getElementById("announcement-content").value;
+                        // Function to add a new classroom
+                        window.addClassroom = function () {
+                            const name = document.getElementById("classroom-name").value;
+                            const capacity = document.getElementById("classroom-capacity").value;
         
-                            // Create a new announcement object
-                            const newAnnouncement = { id: generateId(), title, content };
+                            // Validate the capacity (assuming a positive integer is required)
+                            if (!/^[1-9]\d*$/.test(capacity)) {
+                                alert("Please enter a valid positive integer for capacity.");
+                                return;
+                            }
         
-                            // Add the new announcement to the list
-                            announcements.push(newAnnouncement);
+                            // Create a new classroom object
+                            const newClassroom = { id: generateId(), name, capacity: parseInt(capacity) };
         
-                            // Display all announcements including the new one
-                            displayAnnouncements();
+                            // Add the new classroom to the list
+                            classrooms.push(newClassroom);
+        
+                            // Display all classrooms including the new one
+                            displayClassrooms();
         
                             // Clear the form fields
-                            document.getElementById("announcement-title").value = "";
-                            document.getElementById("announcement-content").value = "";
+                            document.getElementById("classroom-name").value = "";
+                            document.getElementById("classroom-capacity").value = "";
         
                             // Close the create modal
                             closeCreateModal();
                         };
         
-                        // Function to generate a unique ID for announcements
+                        // Function to generate a unique ID for classrooms
                         function generateId() {
                             return Math.floor(Math.random() * 1000) + 1;
                         }
         
-                        // Function to save edited announcement
-                        window.saveEditedAnnouncement = function () {
+                        // Function to save edited classroom
+                        window.saveEditedClassroom = function () {
                             const id = document.getElementById("edit-modal").dataset.id;
-                            const announcementToEdit = announcements.find(announcement => announcement.id == id);
+                            const classroomToEdit = classrooms.find(classroom => classroom.id == id);
         
-                            if (announcementToEdit) {
-                                announcementToEdit.title = document.getElementById("edit-announcement-title").value;
-                                announcementToEdit.content = document.getElementById("edit-announcement-content").value;
+                            if (classroomToEdit) {
+                                classroomToEdit.name = id;
+                                classroomToEdit.capacity = parseInt(document.getElementById("edit-classroom-capacity").value);
         
-                                // Display updated announcements
-                                displayAnnouncements();
+                                // Display updated classrooms
+                                displayClassrooms();
         
                                 // Close the edit modal
                                 closeEditModal();
                             }
                         };
         
-                        // Function to delete an announcement
-                        window.deleteAnnouncement = function (id) {
-                            const confirmDelete = confirm("Are you sure you want to delete this announcement?");
+                        // Function to delete a classroom
+                        window.deleteClassroom = function (id) {
+                            const confirmDelete = confirm("Are you sure you want to delete this classroom?");
         
                             if (confirmDelete) {
-                                announcements = announcements.filter(announcement => announcement.id !== id);
+                                classrooms = classrooms.filter(classroom => classroom.id !== id);
         
-                                // Display updated announcements
-                                displayAnnouncements();
+                                // Display updated classrooms
+                                displayClassrooms();
                             }
                         };
                     });
                 </script>
+            </div>
             </div>
 
     <!-- =========== Scripts =========  -->

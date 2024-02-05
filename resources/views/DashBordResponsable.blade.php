@@ -21,7 +21,7 @@
                             <img   src="{{asset("images/logo-universite.png")}}" alt="University Logo"  class="university-logo"/>
                            
                         </span>
-                        <span class="title">Responsable Péda</span>
+                        <span class="title">Responsable </span>
                     </a>
                 </li>
 
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <!-- ======================= Cards ================== -->
+      
             
             <div class="cardBox">
                 @foreach ($Data['Statistiques'] as $statistique)
@@ -125,8 +125,7 @@
                     </div>
                 @endforeach
             </div>
-            
-            <!-- ================ Order Details List ================= -->
+  
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
@@ -173,7 +172,7 @@
                     </table>
                 </div>
 
-                <!-- ================= New Customers ================ -->
+
                 <div class="recentCustomers">
                     <div class="cardHeader">
                         <h2>Liste Des Étudiants</h2>

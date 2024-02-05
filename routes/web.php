@@ -109,3 +109,22 @@ Route::get('DRProf', [Controller::class, 'DRProf'])->name('DRProf');
 Route::get('DRSalle', [Controller::class, 'DRSalle'])->name('DRSalle');
 
 Route::get('DRAnonce', [Controller::class, 'DRAnonce'])->name('DRAnonce');
+
+
+//new 
+
+Route::post("AjoutEtudiant",[Controller::class,"AjoutEtudiant"])->name("AjoutEtudiant");
+
+
+Route::post("AjoutProf",[Controller::class,"AjoutProf"])->name("AjoutProf");
+Route::post("SupressionClasse",[Controller::class,"SupressionClasse"])->name("SupressionClasse");
+Route::post("AjoutClasse",[Controller::class,"AjoutClasse"])->name("AjoutClasse");
+
+Route::post("SupressionAnnonce",[Controller::class,"SupressionAnnonce"])->name("SupressionAnnonce");
+Route::post("AjoutAnnonce",[Controller::class,"AjoutAnnonce"])->name("AjoutAnnonce");
+
+Route::post("SupressionDemande",[Controller::class,"SupressionDemande"])->name("SupressionDemande");
+Route::post("AjoutDemande",[Controller::class,"AjoutDemande"])->name("AjoutDemande");
+
+Route::post("AjoutDemandeE",[Controller::class,"AjoutDemandeE"])->name("AjoutDemandeE");
+

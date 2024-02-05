@@ -61,7 +61,7 @@
                 </li>
               
                 <li>
-                    <a href="#">
+                    <a href="{{route("k")}}">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -73,54 +73,127 @@
 
         <!-- ========================= Main ==================== -->
         <div class="main">
-            <style>
-               
-         
-        
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 20px;
-                    margin: 20px;
-                }
-        
-                th, td {
-                    border: 1px solid #ddd;
-                    padding: 10px;
-                    text-align: left;
-                }
-        
-                th {
-                    background-color: #f2f2f2;
-                }
-        
-            </style>
-        
-         <div class="container">
-                <h2>Liste des Étudiants du module</h2>
-        
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Email</th>
-                            <th>Programme</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($Data['ListeEtudiants'] as $etudiant)
-                        <tr>
-                            <td>{{ $etudiant->Nom }}</td>
-                            <td>{{ $etudiant->Email }}</td>
-                            <td>{{ $etudiant->Programme }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        
-    </div>
+            <div class="container">
+                <style>
+                    
+                    .container {
+                        display: flex;
+                        justify-content: space-between;
+                     }
+                
+                    .recentOrders {
+                        background-color: #fff;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        width: 60%; /* Ajustez selon vos besoins */
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
+                    }
+                
+                    .addStudentForm {
+                         margin: 5px;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        width: 35%; /* Ajustez selon vos besoins */
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        color: white;
+                        border-radius: 20px;
+                        margin: 10px;
+                        background-color:#2A2185; 
+                    }
+                
+                    .cardHeader {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        
+                    }
+                
+                    h2 {
+                        color: #333;
+                    }
+                
+                    .btn {
+                        background-color: #28a745;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
+                    }.btn:hover{
+                        background-color: #28a745;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
+                    }
+                
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }
+                
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 12px;
+                        text-align: left;
+                    }
+                
+                    th {
+                        background-color: #333;
+                        color: #fff;
+                    }
+                
+                   
+                
+                    .addStudentForm p{
+                        margin: 3px;
+                    }
+                    .addStudentForm button{
+                       border-radius: 15px;
+                       margin-left: 20px;
+                    }
+                    .addStudentForm input{
+                        border-radius: 15px;
+                       outline: none;
+                       border: 1px solid black;
+                        padding: 6px;
+                    }
+                </style>
+                
+
+
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2 style="color: white">Liste Des Étudiants</h2>
+                    </div>
+                
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Code</td>
+                                <td>Nom</td>
+                                <td>Email</td>
+                                <td>Programme</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($Data['ListeEtudiants'] as $etudiant)
+                                <tr>
+                                    <td>{{ $etudiant->ID }}</td>
+                                    <td>{{ $etudiant->Nom }}</td>
+                                    <td>{{ $etudiant->Email }}</td>
+                                    <td>{{ $etudiant->Programme }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
     <!-- =========== Scripts =========  -->
     <script src="{{asset("js/script.js")}}"></script>
